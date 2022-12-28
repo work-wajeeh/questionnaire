@@ -1,0 +1,10 @@
+<div class='my-3'>
+  <% question[:options].each_with_index do |option, i| %>
+    <%= form.fields_for :answers do |f| %>
+      <div class='gap-2 my-4 ml-2 text-lg'>
+        <%= f.radio_button index, option[:option_type], required: true, id: "_answers_#{index}#{i}" %>
+        <%= f.label "#{index}#{i}", option[:title] %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
