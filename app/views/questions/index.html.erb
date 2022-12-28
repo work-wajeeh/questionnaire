@@ -1,0 +1,19 @@
+<% unless alert.nil?%>
+  <p class='py-4 px-5 bg-red-100 mb-5 text-red-600 font-medium rounded-lg text-xl' id='alert'><%= alert %></p>
+<% end %>
+<div data-controller='questions' class='mb-4'>
+  <h1 class='text-4xl font-bold text-red-800 my-5'>Questions</h1>
+  <%= form_with url: submit_url, method: :get, local: true do |form| %>
+    <% @questions.each_with_index do |question, index| %>
+      <div data-questions-target='slide'>
+        <div class='bg-gray-200 p-2 rounded-lg text-xl font-bold text-green-800'>
+          <%= index+1 %>/<%= @questions.length %>
+          <%= question['title'] %>
+        </div>
+
+        <%= render partial:'options', locals: { form: form, question: question, index: index } %>
+        <%= render partial:'navigation', locals: { length: @questions.length, index: index } %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,6 +1,12 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# frozen_string_literal: true
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  root 'tests#new'
+
+  resources :questions, only: :index
+  resources :tests, only: %i[new create destroy]
+
+  get '/submit', to: 'tests#submit'
+  get '/start', to: 'tests#start'
+  get '/result', to: 'tests#result'
 end
