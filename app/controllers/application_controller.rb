@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   private
 
   def error_handler(exception)
-    redirect_back fallback_location: :root, alert: exception.message
+    redirect_to :root, alert: exception.message
   end
 end
