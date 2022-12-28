@@ -8,7 +8,7 @@
       <div>
         <div class='bg-gray-200 p-2 rounded-lg text-xl font-bold text-green-800'>
           <%= index+1 %>
-          <%= question[:title] %>
+          <%= question['title'] %>
         </div>
 
         <%= render partial:'options', locals: { form: form, question: question, index: index } %>

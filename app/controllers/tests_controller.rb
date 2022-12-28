@@ -9,22 +9,29 @@ class TestsController < ApplicationController
   def new; end
 
   def create
-    @@user = { 'name' => params[:name], 'type' => '' }
+    user = { 'name' => params[:name], 'type' => '' }
+    $redis.set('questions', QUESTIONS.to_json)
+    $redis.set('user', user.to_json)
     redirect_to :start
   end
 
   def submit
     answers = test_params
-    @@user['type'] = answers.values.max_by { |value| answers.values.count(value) }
+    user = JSON.parse($redis.get('user'))
+    user[:type] = answers.values.max_by { |value| answers.values.count(value) }
+    $redis.set('user', user.to_json)
   end
 
   def result
-    @user = @@user
-    @@user[:type] = ''
+    user = JSON.parse($redis.get('user'))
+    @user = user
+    user[:type] = ''
+    $redis.set('user', user.to_json)
   end
 
   def destroy
-    @@user.clear
+    $redis.del('user')
+    $redis.del('questions')
     redirect_to :root
   end
 
