@@ -3,6 +3,6 @@
 # Questions Controller
 class QuestionsController < ApplicationController
   def index
-    @questions = JSON.parse($redis.get('questions')).sample(5)
+    @questions = JSON.parse($redis.get('questions')).sample(6)
   end
 end

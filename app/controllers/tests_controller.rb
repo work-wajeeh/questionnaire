@@ -18,7 +18,7 @@ class TestsController < ApplicationController
   def submit
     answers = test_params
     user = JSON.parse($redis.get('user'))
-    user[:type] = answers.values.max_by { |value| answers.values.count(value) }
+    user[:type] = PERSONALITIES[answers.values.count('introvert') - answers.values.count('extrovert') <=> 0]
     $redis.set('user', user.to_json)
   end
 

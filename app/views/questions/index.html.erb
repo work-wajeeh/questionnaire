@@ -3,7 +3,8 @@
 <% end %>
 <div data-controller='questions' class='mb-4'>
   <h1 class='text-4xl font-bold text-red-800 my-5'>Questions</h1>
-  <%= form_with url: submit_url, method: :get, local: true do |form| %>
+  <div class='py-4 px-5 bg-red-100 mb-5 text-red-600 font-medium rounded-lg text-xl' data-questions-target='flash'>Please select an option</div>
+  <%= form_with url: submit_url, method: :get, local: true, id: 'questionnaire' do |form| %>
     <% @questions.each_with_index do |question, index| %>
       <div data-questions-target='slide'>
         <div class='bg-gray-200 p-2 rounded-lg text-xl font-bold text-green-800'>
