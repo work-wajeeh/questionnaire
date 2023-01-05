@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   root 'tests#new'
 
   resources :questions, only: :index
-  resources :tests, only: %i[new create destroy]
+  resources :tests, only: %i[new create]
 
-  get '/submit', to: 'tests#submit'
-  get '/start', to: 'tests#start'
+  post '/submit', to: 'tests#submit'
   get '/result', to: 'tests#result'
+  delete '/quit', to: 'tests#destroy'
 
   get '*path', to: redirect('/')
 end

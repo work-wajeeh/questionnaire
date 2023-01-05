@@ -4,19 +4,13 @@
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def start
-    return if JSON.parse($redis.get('user')).present?
-
-    redirect_to :root
-  end
-
   def new; end
 
   def create
     user = { 'name' => params[:name], 'type' => '' }
     $redis.set('questions', QUESTIONS.to_json)
     $redis.set('user', user.to_json)
-    redirect_to :start
+    redirect_to :questions
   end
 
   def submit
@@ -24,6 +18,7 @@ class TestsController < ApplicationController
     user = JSON.parse($redis.get('user'))
     user[:type] = PERSONALITIES[answers.values.count('introvert') - answers.values.count('extrovert') <=> 0]
     $redis.set('user', user.to_json)
+    redirect_to :result
   end
 
   def result
