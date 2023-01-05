@@ -4,7 +4,11 @@
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def start; end
+  def start
+    return if JSON.parse($redis.get('user')).present?
+
+    redirect_to :root
+  end
 
   def new; end
 
@@ -23,10 +27,7 @@ class TestsController < ApplicationController
   end
 
   def result
-    user = JSON.parse($redis.get('user'))
-    @user = user
-    user[:type] = ''
-    $redis.set('user', user.to_json)
+    @user = JSON.parse($redis.get('user'))
   end
 
   def destroy

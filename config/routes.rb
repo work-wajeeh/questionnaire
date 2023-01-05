@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get '/submit', to: 'tests#submit'
   get '/start', to: 'tests#start'
   get '/result', to: 'tests#result'
+
+  get '*path', to: redirect('/')
 end

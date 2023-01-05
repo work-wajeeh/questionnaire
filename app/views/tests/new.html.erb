@@ -3,7 +3,7 @@
 <%= form_with url: tests_url, method: :post do |form| %>
   <div class='flex my-5 w-full gap-2'>
     <div>
-      <%= form.text_field :name, required: true, placeholder: 'Enter Your Name', class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-5/5' %>
+      <%= form.text_field :name, pattern: "([A-Za-z ,.'-\-\_]+)",required: true, placeholder: 'Enter Your Name', maxlength: 30, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-5/5' %>
     </div>
     <div>
       <%= form.submit class: 'text-green-800 bg-green-100 hover:bg-green-300 p-2 px-3 rounded-xl font-bold' %>
