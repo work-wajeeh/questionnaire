@@ -7,7 +7,7 @@ class TestsController < ApplicationController
   def new; end
 
   def create
-    user = { 'name' => params[:name], 'type' => '' }
+    user = { 'questions' => params[:question], 'type' => '' }
     $redis.set('questions', QUESTIONS.to_json)
     $redis.set('user', user.to_json)
     redirect_to :questions
