@@ -20,6 +20,8 @@ class TestsController < ApplicationController
 
   def result
     @result = $redis.get('result')
+
+    redirect_to :root unless @result
   end
 
   def destroy
