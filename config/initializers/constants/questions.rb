@@ -94,3 +94,7 @@ QUESTIONS = [
     ]
   }
 ].freeze
+
+PERSONALITIES = {
+  -1 => 'extrovert', 0 => 'ambivert', 1 => 'introvert'
+}.freeze

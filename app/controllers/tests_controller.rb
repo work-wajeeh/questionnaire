@@ -4,33 +4,28 @@
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def start; end
-
   def new; end
 
   def create
-    user = { 'name' => params[:name], 'type' => '' }
     $redis.set('questions', QUESTIONS.to_json)
-    $redis.set('user', user.to_json)
-    redirect_to :start
+    redirect_to :questions
   end
 
   def submit
     answers = test_params
-    user = JSON.parse($redis.get('user'))
-    user[:type] = answers.values.max_by { |value| answers.values.count(value) }
-    $redis.set('user', user.to_json)
+    result = PERSONALITIES[answers.values.count('introvert') - answers.values.count('extrovert') <=> 0]
+    $redis.set('result', result)
+    redirect_to :result
   end
 
   def result
-    user = JSON.parse($redis.get('user'))
-    @user = user
-    user[:type] = ''
-    $redis.set('user', user.to_json)
+    @result = $redis.get('result')
+
+    redirect_to :root unless @result
   end
 
   def destroy
-    $redis.del('user')
+    $redis.del('result')
     $redis.del('questions')
     redirect_to :root
   end

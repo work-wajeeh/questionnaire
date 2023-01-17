@@ -2,8 +2,12 @@
   <p class='py-4 px-5 bg-red-100 mb-5 text-red-600 font-medium rounded-lg text-xl' id='alert'><%= alert %></p>
 <% end %>
 <div data-controller='questions' class='mb-4'>
-  <h1 class='text-4xl font-bold text-red-800 my-5'>Questions</h1>
-  <%= form_with url: submit_url, method: :get, local: true do |form| %>
+  <div class='flex justify-between my-5'>
+    <h1 class='text-4xl font-bold text-red-800 '>Questions</h1>
+    <%= button_to 'Quit', quit_path, method: :delete, class: 'bg-red-200 text-red-900 hover:text-red-700 py-2 px-4 rounded-xl text-lg border' %>
+  </div>
+  <div class='py-4 px-5 bg-red-100 mb-5 text-red-600 font-medium rounded-lg text-xl' data-questions-target='flash'>Please select an option</div>
+  <%= form_with url: submit_url, method: :post, local: true, id: 'questionnaire' do |form| %>
     <% @questions.each_with_index do |question, index| %>
       <div data-questions-target='slide'>
         <div class='bg-gray-200 p-2 rounded-lg text-xl font-bold text-green-800'>

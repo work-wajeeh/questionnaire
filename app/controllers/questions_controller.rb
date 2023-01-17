@@ -3,6 +3,11 @@
 # Questions Controller
 class QuestionsController < ApplicationController
   def index
-    @questions = JSON.parse($redis.get('questions')).sample(5)
+    questions = $redis.get('questions')
+    if questions
+      @questions = JSON.parse(questions).sample(6)
+    else
+      redirect_to :root
+    end
   end
 end

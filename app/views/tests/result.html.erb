@@ -1,8 +1,8 @@
 <div class='flex justify-center p-3 rounded-lg text-xl font-bold text-red-800'>
-  <div><%= @user['name'] %>, You are '<%= @user['type'] %>' according to your answers.</div>
+  <div>You are '<%= @result %>' according to your answers.</div>
 </div>
 
 <div class='flex justify-center items-center h-96 gap-2'>
   <%= link_to 'Restart', questions_path, class:  'bg-green-200 hover:bg-green-300 py-2 px-4 rounded-xl text-lg border' %>
-  <%= button_to 'Exit', test_path(@user['name']), method: :delete, class:  'bg-red-200 hover:bg-red-300 py-2 px-4 rounded-xl text-lg border' %>
+  <%= button_to 'Quit', quit_path, method: :delete, class: 'bg-red-200 hover:bg-red-300 py-2 px-4 rounded-xl text-lg border' %>
 </div>
